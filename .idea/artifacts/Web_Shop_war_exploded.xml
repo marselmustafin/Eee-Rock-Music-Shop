@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Web Shop:war exploded">
+    <output-path>$PROJECT_DIR$/target/11-504.mustafin</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Web Shop" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javaee:javaee-api:5" />
+          <element id="library" level="project" name="Maven: postgresql:postgresql:9.1-901.jdbc4" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.20" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/11-504.mustafin/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Web Shop/web/Web" />
+    </root>
+  </artifact>
+</component>
