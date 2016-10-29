@@ -4,8 +4,7 @@
     <title>Login</title>
 </head>
 <body align="center">
-<form action="/profile
-" method="post">
+<form action="/products" method="get">
     <label>Username:</label>
     <input type="text" name="user"><br><br>
     <label>Password:</label>
@@ -13,9 +12,9 @@
     <label>Remember me</label>
     <input type="checkbox" value="Remember me" name="remember">
     <input type="submit" value="Sign In"><br><br>
-    <%String error = (String) session.getAttribute("error_msg");%>
-    <p><%=error == null ? "" : error%>
-    </p>
+    <%String error = (String) session.getAttribute("log_error_msg");%>
+    <p><%=error == null ? "" : error%></p>
+    <p>First time with us? Please <a href="/register">Sign Up</a>> otherwise you will not be able to make purchases.</p>
 </form>
 </body>
 </html>

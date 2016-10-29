@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
             }
         }
         if (s.getAttribute("user") != null) {
-            response.sendRedirect("/profile");
+            response.sendRedirect("/products");
         } else {
             request.getRequestDispatcher("/loginpage").forward(request, response);
         }
