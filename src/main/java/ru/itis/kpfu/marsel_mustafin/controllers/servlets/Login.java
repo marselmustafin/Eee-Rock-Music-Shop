@@ -20,19 +20,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Cookie[] cookies = request.getCookies();
-        HttpSession s = request.getSession();
-        s.setAttribute("passwords", passwords);
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
-                String pass = cookie.getValue();
-                if (hasUser(name, pass)) {
-                    s.setAttribute("user", name);
-                    s.setAttribute("pass", pass);
-                }
-            }
-        }
+
         if (s.getAttribute("user") != null) {
             response.sendRedirect("/products");
         } else {
@@ -40,8 +28,8 @@ public class Login extends HttpServlet {
         }
     }
 
-    private boolean hasUser(String name, String pass) {
-        return (passwords.containsKey(name) && passwords.get(name).equals(pass));
+    private boolean isRegistered(HttpServletRequest rq){
+        return false;
     }
 
     @Override

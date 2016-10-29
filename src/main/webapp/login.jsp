@@ -14,7 +14,7 @@
     <input type="submit" value="Sign In"><br><br>
     <%String error = (String) session.getAttribute("log_error_msg");%>
     <p><%=error == null ? "" : error%></p>
-    <p>First time with us? Please <a href="/register">Sign Up</a>> otherwise you will not be able to make purchases.</p>
+    <p>First time with us? Please <a href="/reg">Sign Up</a>> otherwise you will not be able to make purchases.</p>
 </form>
 </body>
 </html>
