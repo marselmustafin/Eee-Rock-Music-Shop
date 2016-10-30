@@ -31,6 +31,7 @@ public class DBController {
         ResultSet rs = null;
         try {
             rs = CON.createStatement().executeQuery(s);
+            CON.close();
         }catch (SQLException e){
             e.printStackTrace();
         }

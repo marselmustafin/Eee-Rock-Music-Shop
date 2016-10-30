@@ -1,5 +1,7 @@
 package ru.itis.kpfu.marsel_mustafin.controllers.servlets;
 
+import ru.itis.kpfu.marsel_mustafin.models.AccountManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -8,33 +10,44 @@ import java.util.Map;
 
 public class Login extends HttpServlet {
 
-    private Map passwords;
-
     @Override
-    public void init() {
-        passwords = new HashMap();
-        passwords.put("martin", "123");
-        passwords.put("Jackson", "1995");
-        passwords.put("Godzilla", "argh");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        if (s.getAttribute("user") != null) {
-            response.sendRedirect("/products");
+    protected void doGet(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException {
+        Cookie[] cookies = rq.getCookies();
+        HttpSession s = rq.getSession();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                String login = cookie.getName();
+                String password = cookie.getValue();
+                if(AccountManager.validate(login, password)){
+                    s.setAttribute("login", login);
+                }
+            }
+        }
+        if (s.getAttribute("login") != null) {
+            rs.sendRedirect("/products.jsp");
         } else {
-            request.getRequestDispatcher("/loginpage").forward(request, response);
+            rq.getRequestDispatcher("/login.jsp").forward(rq, rs);
         }
     }
 
-    private boolean isRegistered(HttpServletRequest rq){
-        return false;
-    }
-
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    protected void doPost(HttpServletRequest rq, HttpServletResponse rs) throws IOException {
+        String login = rq.getParameter("login");
+        String password = rq.getParameter("password");
+        HttpSession s = rq.getSession();
+        if (AccountManager.validate(login, password)){
+            if (rq.getParameter("remember") != null) {
+                Cookie cookie = new Cookie(login, password);
+                cookie.setMaxAge(24 * 60 * 60);
+                rs.addCookie(cookie);
+            }
+            s.setAttribute("login", login);
+            rs.sendRedirect("/products.jsp");
+        }else if(!AccountManager.isRegistrated("login",login)){
+            rs.sendRedirect("login.jsp?msg=login is not registered");
+        }else {
+            rs.sendRedirect("login.jsp?msg=uncorrect password");
+        }
     }
 }
 

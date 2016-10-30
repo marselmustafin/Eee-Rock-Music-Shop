@@ -3,15 +3,17 @@
 <head>
     <title>Registration</title>
 </head>
-<body>
-<form action="/products" method="get">
+<body align="center">
+<form action="/reg" method="post">
     <label>Username:</label>
-    <input type="text" name="user"><br><br>
+    <input type="text" name="login"><br><br>
     <label>Password:</label>
     <input type="password" name="pass"><br><br>
+    <label>Email:</label>
+    <input type="text" name="email"><br><br>
     <input type="submit" value="Sign Up"><br><br>
-    <%String error = (String) session.getAttribute("reg_error_msg");%>
-    <p><%=error == null ? "" : error%></p>
+    <%String msg = request.getParameter("msg");%>
+    <label><%=msg == null ? "" : msg%></label>
 </form>
 </body>
 </html>

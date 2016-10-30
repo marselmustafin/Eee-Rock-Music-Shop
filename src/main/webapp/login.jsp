@@ -4,17 +4,17 @@
     <title>Login</title>
 </head>
 <body align="center">
-<form action="/products" method="get">
+<form action="/login" method="post">
     <label>Username:</label>
-    <input type="text" name="user"><br><br>
+    <input type="text" name="login"><br><br>
     <label>Password:</label>
-    <input type="password" name="pass"><br><br>
+    <input type="password" name="password"><br><br>
     <label>Remember me</label>
     <input type="checkbox" value="Remember me" name="remember">
     <input type="submit" value="Sign In"><br><br>
-    <%String error = (String) session.getAttribute("log_error_msg");%>
-    <p><%=error == null ? "" : error%></p>
-    <p>First time with us? Please <a href="/reg">Sign Up</a>> otherwise you will not be able to make purchases.</p>
+    <p>First time with us? Please <a href="/reg">Sign Up</a> otherwise you will not be able to make purchases.</p>
+    <%String msg = request.getParameter("msg");%>
+    <label><%=msg == null ? "" : msg%></label>
 </form>
 </body>
 </html>

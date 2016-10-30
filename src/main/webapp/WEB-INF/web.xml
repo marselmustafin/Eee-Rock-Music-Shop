@@ -9,20 +9,8 @@
         <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Login</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginPage</servlet-name>
-        <jsp-file>/login.jsp</jsp-file>
-    </servlet>
-    <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Logout</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Products</servlet-name>
-        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Products</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductsPage</servlet-name>
-        <jsp-file>/products.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>Registration</servlet-name>
@@ -33,20 +21,8 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginPage</servlet-name>
-        <url-pattern>/loginpage</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Products</servlet-name>
-        <url-pattern>/products</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductsPage</servlet-name>
-        <url-pattern>/productspage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
