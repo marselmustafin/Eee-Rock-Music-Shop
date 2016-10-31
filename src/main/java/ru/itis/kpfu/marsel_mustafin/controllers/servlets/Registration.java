@@ -24,7 +24,8 @@ public class Registration extends HttpServlet {
             if (!AccountManager.isRegistrated("login", login)) {
                 if (AccountManager.emailCheck(email)) {
                     AccountDAO us = new AccountDAO();
-                    if (us.registrate(new Account(login, password, email))) {
+                    if (us.addNew(new Account(login, password, email))) {
+                        us.close();
                         rq.getRequestDispatcher("/regsucces.jsp").forward(rq, rs);
                     }
                 } else {

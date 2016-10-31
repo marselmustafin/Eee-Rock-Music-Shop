@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBController {
 
-    private Connection CON = null;
+    private Connection con = null;
     private final String USER = "postgres";
     private final String PASS = "1234";
     private final String URL = "jdbc:postgresql://localhost:5432/shop";
@@ -12,26 +12,32 @@ public class DBController {
     DBController(){
         try {
             Class.forName("org.postgresql.Driver");
-            CON = DriverManager.getConnection(URL, USER, PASS);
+            con = DriverManager.getConnection(URL, USER, PASS);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
     public Connection getCon() {
-        Connection con = CON;
+        Connection con = this.con;
         return con;
     }
 
     public void closeCon() throws SQLException {
-        CON.close();
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public ResultSet executeStatement(String s){
         ResultSet rs = null;
         try {
-            rs = CON.createStatement().executeQuery(s);
-            CON.close();
+            rs = con.createStatement().executeQuery(s);
+            con.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
