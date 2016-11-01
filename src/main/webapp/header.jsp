@@ -8,9 +8,13 @@
     <div>
         <table>
             <tr>
-                <td><a href='products?page=1'><span>Home</span></a></td>
-                <td><a href='/login'><span>Login</span></a></td>
-                <td><a href='index.jsp'><span>About</span></a></td>
+                <td><a href='index.jsp'>About</a></td>
+                <td><a href='products?page=1'>Home</a></td>
+                <%if (session.getAttribute("role") == null) {%>
+                <td><a href='/login'>Login</a></td>
+                <%} else {%>
+                <td><a href='/logout'>Logout</a></td>
+                <%}%>
             </tr>
         </table>
     </div>

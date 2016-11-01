@@ -39,6 +39,5 @@
     <%}%>
 </table>
 <br>
-<a href="/logout" align="center">Log Out</a>
 </div>
 <%@include file="footer.jsp" %>

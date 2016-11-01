@@ -16,24 +16,19 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException {
         Cookie[] cookies = rq.getCookies();
         HttpSession s = rq.getSession();
-        try {
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    String login = cookie.getName();
-                    String password = cookie.getValue();
-                    if (AccountManager.validate(login, password)) {
-                        s.setAttribute("account", new AccountDAO().get(login));
-                        s.setAttribute("isAdmin", new Boolean(AccountManager.isAdmin(login)));
-                    }
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                String login = cookie.getName();
+                String password = cookie.getValue();
+                if (AccountManager.validate(login, password)) {
+                    makeAttributes(s, login);
                 }
             }
-            if (s.getAttribute("account") != null) {
-                rs.sendRedirect("/products?page=1");
-            } else {
-                rq.getRequestDispatcher("/login.jsp").forward(rq, rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }
+        if (s.getAttribute("account") != null) {
+            rs.sendRedirect("/products?page=1");
+        } else {
+            rq.getRequestDispatcher("/login.jsp").forward(rq, rs);
         }
     }
 
@@ -48,17 +43,22 @@ public class Login extends HttpServlet {
                 cookie.setMaxAge(24 * 60 * 60);
                 rs.addCookie(cookie);
             }
-            try {
-                s.setAttribute("account", new AccountDAO().get(login));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            s.setAttribute("isAdmin", new Boolean(AccountManager.isAdmin(login)));
+            makeAttributes(s, login);
             rs.sendRedirect("/products?page=1");
         } else if (!AccountManager.isRegistrated("login", login)) {
             rs.sendRedirect("login.jsp?msg=login is not registered");
         } else {
             rs.sendRedirect("login.jsp?msg=uncorrect password");
+        }
+    }
+
+    private void makeAttributes(HttpSession s, String login) {
+        try {
+            s.setAttribute("account", new AccountDAO().get(login));
+            int role = AccountManager.isAdmin(login) ? 2 : 1;
+            s.setAttribute("role", role);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

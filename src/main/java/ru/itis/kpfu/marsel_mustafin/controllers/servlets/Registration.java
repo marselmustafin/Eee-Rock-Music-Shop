@@ -17,6 +17,9 @@ public class Registration extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException {
+        if (rq.getSession().getAttribute("role") != null) {
+            rs.sendRedirect("/products?page=1");
+        }
         String login = rq.getParameter("login");
         String password = rq.getParameter("pass");
         String email = rq.getParameter("email");

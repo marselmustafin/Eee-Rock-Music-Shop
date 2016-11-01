@@ -45,12 +45,35 @@ public class ProductDAO implements DAO<Product> {
         return getListFromResultSet(rs);
     }
 
-    public ArrayList<Product> getList(String param, String value) throws SQLException {
-        String query = "SELECT * FROM albums WHERE " + param + " = ?;";
-        PreparedStatement ps= con.prepareStatement(query);
-        ps.setString(1, value);
-        ResultSet rs = ps.executeQuery();
-        return getListFromResultSet(rs);
+    public ArrayList<Product> getList(String param, String value) {
+        try {
+            String query = "SELECT * FROM albums WHERE " + param + " = ?;";
+            PreparedStatement ps = con.prepareStatement(query);
+            if (isDigit(value)) {
+                ps.setInt(1, Integer.parseInt(value));
+            } else {
+                ps.setString(1, value);
+            }
+            ResultSet rs = ps.executeQuery();
+            return getListFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static boolean isDigit(String s) throws NumberFormatException {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public Product get(int id) {
+        ArrayList<Product> temp = getList("id", String.valueOf(id));
+        return temp == null ? null : temp.get(0);
     }
 
     private ArrayList<Product> getListFromResultSet(ResultSet rs) throws SQLException {
