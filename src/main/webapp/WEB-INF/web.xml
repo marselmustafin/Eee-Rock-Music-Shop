@@ -16,6 +16,10 @@
         <servlet-name>Registration</servlet-name>
         <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Registration</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Products</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Products</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -27,5 +31,9 @@
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
         <url-pattern>/reg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Products</servlet-name>
+        <url-pattern>/products</url-pattern>
     </servlet-mapping>
 </web-app>

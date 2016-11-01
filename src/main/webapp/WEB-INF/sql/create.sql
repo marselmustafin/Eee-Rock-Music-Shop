@@ -29,3 +29,5 @@ INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id
  VALUES ('Nirvana', 'Nevermind', 'Great album from popular band `Nirvana`', 10, 20, 3);
 INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
  VALUES ('Red Hot Chilli Peppers', 'By the Way', 'One more album from RHCP!', 15, 17, 4);
+INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
+ VALUES ('Queen', 'Jazz', 'Beautiful rock from Freddie Mercury and his group `Quenn`', 15, 20, 5);

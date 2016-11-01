@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
                 }
             }
             if (s.getAttribute("account") != null) {
-                rs.sendRedirect("/products.jsp?page=1");
+                rs.sendRedirect("/products?page=1");
             } else {
                 rq.getRequestDispatcher("/login.jsp").forward(rq, rs);
             }
@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
                 e.printStackTrace();
             }
             s.setAttribute("isAdmin", new Boolean(AccountManager.isAdmin(login)));
-            rs.sendRedirect("/products.jsp?page=1");
+            rs.sendRedirect("/products?page=1");
         } else if (!AccountManager.isRegistrated("login", login)) {
             rs.sendRedirect("login.jsp?msg=login is not registered");
         } else {

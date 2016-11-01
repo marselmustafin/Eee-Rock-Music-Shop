@@ -1,33 +1,21 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="ru.itis.kpfu.marsel_mustafin.models.Product" %>
-<%@ page import="ru.itis.kpfu.marsel_mustafin.controllers.db.ProductDAO" %>
+<%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Products</title>
-</head>
-<body>
-<%
-    ProductDAO dao = new ProductDAO();
-    ArrayList<Product> products = dao.getAll();
-    int types = products.size();
-    int num = Integer.parseInt(request.getParameter("page"));
-    int end = num * 10;
-    int cursor = end - 10;
-%>
-<h2 align="center">Albums</h2>
-<table align="center">
+<%@include file="header.jsp" %>
     <%
-        while (cursor < end) {
+        List<Product> products = (List<Product>) request.getAttribute("products");
+        ListIterator<Product> li = products.listIterator();
     %>
+<div align="center">
+<h2>Albums</h2>
+<table>
+    <%show:while (true) {%>
     <tr>
-        <%
-            for (int k = 0; k < 2; k++) {
-                Product p = cursor < types ? products.get(cursor) : null;
-                if (p != null) {
-                    String source = "\"img/albumcovers/" + p.getImgId() + ".jpg\"";
-                    String href = "\"product.jsp?id=" + p.getId() + "\"";
+        <% for (int i = 0; i < 2; i++) {
+            if (li.hasNext()) {
+                Product p = li.next();
+                String source = "\"img/albumcovers/" + p.getImgId() + ".jpg\"";
+                String href = "\"product.jsp?id=" + p.getId() + "\"";
         %>
         <td>
             <p><img src=<%=source%> height="180" width="180"></p>
@@ -42,23 +30,15 @@
             <a href=<%=href%>>More</a>
         </td>
         <%
+                } else {
+                    break show;
                 }
-                cursor++;
             }
         %>
     </tr>
-    <%} %>
+    <%}%>
 </table>
-<%
-    for (int i = 0; i < types / 10; i++) {
-        String href = "\"products.jsp?page=" + i + 1 + "\"";
-%>
-<a href=<%=href%>><%=i + 1%>
-</a>
-<%
-    }
-%>
 <br>
-<a href="/logout">Log Out</a>
-</body>
-</html>
+<a href="/logout" align="center">Log Out</a>
+</div>
+<%@include file="footer.jsp" %>

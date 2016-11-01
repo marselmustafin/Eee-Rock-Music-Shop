@@ -1,9 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body align="center">
+<%@include file="header.jsp" %>
+<div align="center">
 <form action="/login" method="post">
     <label>Username:</label>
     <input type="text" name="login"><br><br>
@@ -16,5 +12,5 @@
     <%String msg = request.getParameter("msg");%>
     <label><%=msg == null ? "" : msg%></label>
 </form>
-</body>
-</html>
+</div>
+<%@include file="footer.jsp" %>
