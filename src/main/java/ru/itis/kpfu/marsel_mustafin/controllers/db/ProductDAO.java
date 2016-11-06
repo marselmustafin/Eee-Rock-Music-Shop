@@ -1,7 +1,6 @@
 package ru.itis.kpfu.marsel_mustafin.controllers.db;
 
 import ru.itis.kpfu.marsel_mustafin.controllers.db.interfaces.DAO;
-import ru.itis.kpfu.marsel_mustafin.models.Account;
 import ru.itis.kpfu.marsel_mustafin.models.Product;
 
 import java.sql.Connection;
@@ -21,31 +20,41 @@ public class ProductDAO implements DAO<Product> {
         con = controller.getCon();
     }
 
-
-    public boolean addNew(Product element) throws SQLException {
-        String query = "INSERT INTO albums (band_name, album_name, description, quantity, price, img_id) VALUES (?, ?, ?, ?, ?, ?)";
-        if (con != null) {
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, element.getBandName());
-            ps.setString(2, element.getAlbumName());
-            ps.setString(3, element.getDescription());
-            ps.setInt(4, element.getQuantity());
-            ps.setInt(5, element.getPrice());
-            ps.setInt(6, element.getImgId());
-            ps.execute();
-            return true;
-        } else {
-            return false;
-        }
+    public boolean addNew(Product element) {
+        String query = "INSERT INTO albums (band_name, album_name, description, quantity, price) VALUES (?, ?, ?, ?, ?)";
+        return execute(element, query);
     }
 
-    public ArrayList<Product> getAll() throws SQLException {
-        String query = "SELECT id, band_name, album_name, description, quantity, price, img_id FROM albums";
+    public boolean edit(Product element) {
+        String query = "UPDATE albums SET band_name = ?, album_name = ?, description = ? , quantity = ?, price = ? WHERE id = " + element.getId();
+        return execute(element, query);
+    }
+
+    public boolean execute(Product element, String query) {
+        if (con != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(1, element.getBandName());
+                ps.setString(2, element.getAlbumName());
+                ps.setString(3, element.getDescription());
+                ps.setInt(4, element.getQuantity());
+                ps.setInt(5, element.getPrice());
+                ps.execute();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public List<Product> getAll() {
+        String query = "SELECT id, band_name, album_name, description, quantity, price FROM albums";
         ResultSet rs = controller.executeStatement(query);
         return getListFromResultSet(rs);
     }
 
-    public ArrayList<Product> getList(String param, String value) {
+    public List<Product> getList(String param, String value) {
         try {
             String query = "SELECT * FROM albums WHERE " + param + " = ?;";
             PreparedStatement ps = con.prepareStatement(query);
@@ -71,35 +80,34 @@ public class ProductDAO implements DAO<Product> {
         }
     }
 
-    public Product get(int id) {
-        ArrayList<Product> temp = getList("id", String.valueOf(id));
+    public Product getFirst(String type, String value) {
+        List<Product> temp = getList(type, value);
         return temp == null ? null : temp.get(0);
     }
 
-    private ArrayList<Product> getListFromResultSet(ResultSet rs) throws SQLException {
-        ArrayList<Product> result = new ArrayList<Product>();
-        while (rs.next()) {
-            String bandName = rs.getString("band_name");
-            String albumName = rs.getString("album_name");
-            String description = rs.getString("description");
-            int quantity = rs.getInt("quantity");
-            int price = rs.getInt("price");
-            int imgId = rs.getInt("img_id");
-            int id = rs.getInt("id");
-            Product temp = new Product(bandName, albumName, description, quantity, price, imgId);
-            temp.setId(id);
-            result.add(temp);
+    private List<Product> getListFromResultSet(ResultSet rs) {
+        List<Product> result = new ArrayList<Product>();
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    String bandName = rs.getString("band_name");
+                    String albumName = rs.getString("album_name");
+                    String description = rs.getString("description");
+                    int quantity = rs.getInt("quantity");
+                    int price = rs.getInt("price");
+                    int id = rs.getInt("id");
+                    Product temp = new Product(bandName, albumName, description, quantity, price);
+                    temp.setId(id);
+                    result.add(temp);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result.isEmpty() ? null : result;
     }
 
     public void close() {
-        if (controller != null) {
-            try {
-                controller.closeCon();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        controller.closeCon();
     }
 }

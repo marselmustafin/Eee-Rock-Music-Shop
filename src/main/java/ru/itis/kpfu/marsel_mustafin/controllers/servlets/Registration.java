@@ -12,35 +12,35 @@ import java.sql.SQLException;
 public class Registration extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
+        if (rq.getSession().getAttribute("account") != null) {
+            rs.sendRedirect("/products?page=1");
+        }
         rq.getRequestDispatcher("/registration.jsp").forward(rq, rs);
     }
 
     @Override
     protected void doPost(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException {
-        if (rq.getSession().getAttribute("role") != null) {
-            rs.sendRedirect("/products?page=1");
-        }
         String login = rq.getParameter("login");
-        String password = rq.getParameter("pass");
+        String password = rq.getParameter("password");
+        String confirm = rq.getParameter("confirm");
+        if (!password.equals(confirm)) {
+            rs.sendRedirect("registration.jsp?msg=Passwords are different");
+        }
         String email = rq.getParameter("email");
-        try {
-            if (!AccountManager.isRegistrated("login", login)) {
-                if (AccountManager.emailCheck(email)) {
-                    AccountDAO us = new AccountDAO();
-                    if (us.addNew(new Account(login, password, email))) {
-                        us.close();
-                        rq.getRequestDispatcher("/regsucces.jsp").forward(rq, rs);
-                    }
-                } else {
-                    rs.sendRedirect("registration.jsp?msg=uncorrect email");
+        if (!AccountManager.isRegistrated("login", login)) {
+            if (AccountManager.emailCheck(email)) {
+                AccountDAO us = new AccountDAO();
+                if (us.addNew(new Account(login, password, email))) {
+                    us.close();
+                    rq.getRequestDispatcher("/regsucces.jsp").forward(rq, rs);
                 }
-            } else if (AccountManager.isRegistrated("login", login)) {
-                rs.sendRedirect("registration.jsp?msg=same login is already registered");
             } else {
-                rs.sendRedirect("registration.jsp?msg=same email is already used");
+                rs.sendRedirect("registration.jsp?msg=Uncorrect email");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else if (AccountManager.isRegistrated("login", login)) {
+            rs.sendRedirect("registration.jsp?msg=Same login is already registered");
+        } else {
+            rs.sendRedirect("registration.jsp?msg=Same email is already used");
         }
     }
 }

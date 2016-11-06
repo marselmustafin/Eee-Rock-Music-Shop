@@ -7,35 +7,29 @@ public class Account {
     private int role = 1;//1 - user, 2 - admin
 
     public Account(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
-
-    public Account(String login, String password, String email, int role) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.role = role;
+        this.setLogin(login);
+        this.setPassword(password);
+        this.setEmail(email);
     }
 
     public String getEmail() {
-        String email = this.email;
         return email;
     }
 
     public String getLogin() {
-        String login = this.login;
         return login;
     }
 
     public String getPassword() {
-        String password = this.password;
         return password;
     }
 
-    public boolean isAdmin(){
-        return role==2;
+    public int getRole() {
+        return role;
+    }
+
+    public boolean isAdmin() {
+        return role == 2;
     }
 
     public void setEmail(String email) {
@@ -48,5 +42,9 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

@@ -20,6 +20,18 @@
         <servlet-name>Products</servlet-name>
         <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Products</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDetail</servlet-name>
+        <jsp-file>/product.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductEdit</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.ProductEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductAdd</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.ProductAdd</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -35,5 +47,17 @@
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
         <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetail</servlet-name>
+        <url-pattern>/product_detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductEdit</servlet-name>
+        <url-pattern>/product_edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductAdd</servlet-name>
+        <url-pattern>/add</url-pattern>
     </servlet-mapping>
 </web-app>

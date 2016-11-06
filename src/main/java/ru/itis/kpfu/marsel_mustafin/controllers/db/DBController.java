@@ -23,7 +23,7 @@ public class DBController {
         return con;
     }
 
-    public void closeCon() throws SQLException {
+    public void closeCon(){
         if (con != null) {
             try {
                 con.close();

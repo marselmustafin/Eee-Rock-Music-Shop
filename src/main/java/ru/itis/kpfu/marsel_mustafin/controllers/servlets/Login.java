@@ -2,6 +2,7 @@ package ru.itis.kpfu.marsel_mustafin.controllers.servlets;
 
 import ru.itis.kpfu.marsel_mustafin.controllers.db.AccountDAO;
 import ru.itis.kpfu.marsel_mustafin.models.AccountManager;
+import ru.itis.kpfu.marsel_mustafin.models.Cart;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -46,20 +47,17 @@ public class Login extends HttpServlet {
             makeAttributes(s, login);
             rs.sendRedirect("/products?page=1");
         } else if (!AccountManager.isRegistrated("login", login)) {
-            rs.sendRedirect("login.jsp?msg=login is not registered");
+            rs.sendRedirect("login.jsp?msg=Login is not registered");
         } else {
-            rs.sendRedirect("login.jsp?msg=uncorrect password");
+            rs.sendRedirect("login.jsp?msg=Uncorrect password");
         }
     }
 
     private void makeAttributes(HttpSession s, String login) {
-        try {
-            s.setAttribute("account", new AccountDAO().get(login));
-            int role = AccountManager.isAdmin(login) ? 2 : 1;
-            s.setAttribute("role", role);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        s.setAttribute("account", new AccountDAO().getFirst("login", login));
+        int role = AccountManager.isAdmin(login) ? 2 : 1;
+        s.setAttribute("role", role);
+        s.setAttribute("cart", new Cart());
     }
 }
 

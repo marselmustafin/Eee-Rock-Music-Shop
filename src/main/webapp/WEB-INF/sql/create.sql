@@ -15,19 +15,18 @@ CREATE TABLE albums (
   album_name VARCHAR (50) NOT NULL,
   description VARCHAR (255) NULL,
   quantity INT NOT NULL DEFAULT 0,
-  price INT NOT NULL,
-  img_id INT NULL
+  price INT NOT NULL
   );
 
 INSERT INTO accounts (login, password, email, role) VALUES ('nimda', 'myrules123', 'sergio@mail.ru', 2);
 
-INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
- VALUES ('The Beatles', 'Abbey Road', 'Old good album from legendary British band', 5, 20, 1);
-INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
- VALUES ('Red Hot Chilli Peppers', 'Californication', 'One of the best RHCP`s albums', 10, 15, 2);
-INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
- VALUES ('Nirvana', 'Nevermind', 'Great album from popular band `Nirvana`', 10, 20, 3);
-INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
- VALUES ('Red Hot Chilli Peppers', 'By the Way', 'One more album from RHCP!', 15, 17, 4);
-INSERT  INTO albums (band_name, album_name, description, quantity, price, img_id)
- VALUES ('Queen', 'Jazz', 'Beautiful rock from Freddie Mercury and his group `Quenn`', 15, 20, 5);
+INSERT  INTO albums (band_name, album_name, description, quantity, price)
+ VALUES ('The Beatles', 'Abbey Road', 'Old good album from legendary British band', 5, 20);
+INSERT  INTO albums (band_name, album_name, description, quantity, price)
+ VALUES ('Red Hot Chilli Peppers', 'Californication', 'One of the best RHCP`s albums', 10, 15);
+INSERT  INTO albums (band_name, album_name, description, quantity, price)
+ VALUES ('Nirvana', 'Nevermind', 'Great album from popular band `Nirvana`', 10, 20);
+INSERT  INTO albums (band_name, album_name, description, quantity, price)
+ VALUES ('Red Hot Chilli Peppers', 'By the Way', 'One more album from RHCP!', 15, 17);
+INSERT  INTO albums (band_name, album_name, description, quantity, price)
+ VALUES ('Queen', 'Jazz', 'Beautiful rock from Freddie Mercury and his group `Quenn`', 15, 20);

@@ -10,13 +10,12 @@ public class Product {
     private int quantity;
     private int imgId;
 
-    public Product(String bandName, String albumName, String description, int quantity, int price, int imgId) {
+    public Product(String bandName, String albumName, String description, int quantity, int price) {
         this.setBandName(bandName);
         this.setAlbumName(albumName);
         this.setDescription(description);
         this.setQuantity(quantity);
         this.setPrice(price);
-        this.setImgId(imgId);
     }
 
     public void setId(int id) {
@@ -52,12 +51,10 @@ public class Product {
     }
 
     public String getBandName() {
-        String bandName = this.bandName;
         return bandName;
     }
 
     public String getAlbumName() {
-        String albumName = this.albumName;
         return albumName;
     }
 
@@ -66,7 +63,6 @@ public class Product {
     }
 
     public String getDescription() {
-        String description = this.description;
         return description;
     }
 
