@@ -25,12 +25,24 @@
         <jsp-file>/product.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>ProductEdit</servlet-name>
-        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.ProductEdit</servlet-class>
+        <servlet-name>ProductRemove</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.ProductRemove</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProductAdd</servlet-name>
-        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.ProductAdd</servlet-class>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.AddToCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductOperation</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.ProductOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveFromCart</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.RemoveFromCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentOperation</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.CommentOperation</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -53,11 +65,23 @@
         <url-pattern>/product_detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductEdit</servlet-name>
-        <url-pattern>/product_edit</url-pattern>
+        <servlet-name>ProductRemove</servlet-name>
+        <url-pattern>/product_remove</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductAdd</servlet-name>
-        <url-pattern>/add</url-pattern>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/addtocart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductOperation</servlet-name>
+        <url-pattern>/product_operation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveFromCart</servlet-name>
+        <url-pattern>/removefromcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentOperation</servlet-name>
+        <url-pattern>/comment_operation</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -19,7 +19,6 @@ public class DBController {
     }
 
     public Connection getCon() {
-        Connection con = this.con;
         return con;
     }
 
@@ -33,7 +32,7 @@ public class DBController {
         }
     }
 
-    public ResultSet executeStatement(String s){
+    public ResultSet executeQuery(String s){
         ResultSet rs = null;
         try {
             rs = con.createStatement().executeQuery(s);

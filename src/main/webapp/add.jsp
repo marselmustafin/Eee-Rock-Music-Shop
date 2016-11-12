@@ -1,11 +1,11 @@
 <%@include file="header.jsp" %>
 <div align="center">
     <label>Edit</label>
-    <form action="/add" method="post">
+    <form action="/product_operation" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>
-                    <input type="image" name="image">
+                    <input type="file" name="file" size="50"/>
                 </td>
             </tr>
             <tr>
@@ -40,9 +40,11 @@
                     <textarea name="description"></textarea>
                 </td>
             </tr>
+            <input type="hidden" name="operation" value="add">
         </table>
         <input type="submit" value="Add"><br>
         <%
+            request.setAttribute("operation","add");
             String msg = request.getParameter("msg");
             String success = request.getParameter("succ");
         %>

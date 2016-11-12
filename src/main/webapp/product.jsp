@@ -28,19 +28,34 @@
         </tr>
     </table>
     <br>
-    <% Integer role = (Integer) session.getAttribute("role");
-        if (role != null && role == 1) { %>
-    <select>
-        <%
-            for (int i = 1; i <= p.getQuantity(); i++) {
-                String quantity = String.valueOf(i);
-        %>
-        <option value=<%=quantity%>><%=i%>
-        </option>
-        <%}%>
-    </select>
-    <input type="button" value="Buy">
+    <%if (role == 1) { %>
+    <form class="addform" method="post">
+        <select class="prodq" name="prodq"><label>Quantity:</label>
+            <%
+                for (int k = 1; k <= p.getQuantity(); k++) {
+                    String quantity = String.valueOf(k);
+            %>
+            <option value=<%=quantity%>><%=k%>
+            </option>
+            <%}%>
+        </select>
+        <input class="prodid" type="hidden" name="prodid" value=<%=p.getId()%>>
+        <input type="submit" value="Add to cart">
+    </form>
     <%}%>
     <a href="products?page=1">Back</a>
+    <div>
+        <h2>Comments</h2>
+        <%if (role != 0) { %>
+        <form class="commentform" method="post">
+            <textarea class="msg" name="msg" cols="40" rows="5"></textarea><br>
+            <input class="productid" type="hidden" name="productid" value=<%=request.getParameter("id")%>>
+            <input type="submit" value="Post a comment">
+        </form>
+        <%}%>
+    </div>
+    <div id="comments">
+        <%@include file="commentlist.jsp" %>
+    </div>
 </div>
 <%@include file="footer.jsp" %>

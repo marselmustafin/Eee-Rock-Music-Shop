@@ -1,6 +1,6 @@
 package ru.itis.kpfu.marsel_mustafin.models;
 
-public class Product {
+public class Product{
 
     private int id;
     private String bandName;
@@ -8,42 +8,21 @@ public class Product {
     private int price;
     private String description;
     private int quantity;
-    private int imgId;
 
     public Product(String bandName, String albumName, String description, int quantity, int price) {
-        this.setBandName(bandName);
-        this.setAlbumName(albumName);
-        this.setDescription(description);
-        this.setQuantity(quantity);
-        this.setPrice(price);
+        this.bandName = bandName;
+        this.albumName = albumName;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
-    }
-
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public void setImgId(int imgId) {
-        this.imgId = imgId;
     }
 
     public int getId() {
@@ -68,10 +47,6 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public int getImgId() {
-        return imgId;
     }
 }
 

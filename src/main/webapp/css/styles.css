@@ -1,0 +1,18 @@
+.error {
+    color: red;
+    font-size: 150%;
+}
+
+.error input {
+    border: 1px solid red;
+}
+
+h5 {
+    color: grey;
+    font-size: 80%;
+}
+
+p.success {
+    color: green;
+    font-size: 150%;
+}

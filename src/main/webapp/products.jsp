@@ -3,14 +3,13 @@
 <%@include file="header.jsp" %>
 <%
     LinkedList<Product> products = (LinkedList<Product>) request.getAttribute("products");
-    Integer role = (Integer) session.getAttribute("role");
 %>
 <div align="center">
     <h2>Albums</h2>
-    <%if (role != null && role == 2) { %>
-    <a href="/add">Add New Product</a>
+    <%if (role == 2) { %>
+    <a href="/product_operation">Add New Product</a>
     <% }%>
-    <table>
+    <table class="product_table">
         <%while (!products.isEmpty()) {%>
         <tr>
             <% for (int i = 0; i < 2; i++) {
@@ -29,28 +28,32 @@
                 </p>
                 <p>Price: <%=p.getPrice()%>$</p>
                 <p>
-                    Description: <%=p.getDescription().length() > 18 ? p.getDescription().substring(0, 20) : ""%>
+                    Description: <%=p.getDescription().length() > 19 ? p.getDescription().substring(0, 20) : ""%>
                     ...</p>
-                <%if (role != null && role == 1) { %>
-
-                <select id="prodq"><label for="prodq">Quantity:</label>
-                    <%
-                        for (int k = 1; k <= p.getQuantity(); k++) {
-                            String quantity = String.valueOf(k);
-                    %>
-                    <option value=<%=quantity%>><%=k%>
-                    </option>
-                    <%}%>
-                </select>
-                <input type="button" value="Buy">
+                <%if (role == 1) { %>
+                <form class="addform" method="post">
+                    <select class="prodq" name="prodq"><label>Quantity:</label>
+                        <%
+                            for (int k = 1; k <= p.getQuantity(); k++) {
+                                String quantity = String.valueOf(k);
+                        %>
+                        <option value=<%=quantity%>><%=k%>
+                        </option>
+                        <%}%>
+                    </select>
+                    <input class="prodid" type="hidden" name="prodid" value=<%=p.getId()%>>
+                    <input type="submit" value="Add to cart">
+                </form>
+                <div id="result"></div>
                 <%}%>
                 <a href=<%=prodHref%>>More</a>
                 <%
-                    if (role != null && role == 2) {
-                        String editHref = "/product_edit?id=" + p.getId();
-
+                    if (role == 2) {
+                        String editHref = "/edit.jsp?id=" + p.getId();
+                        String removeHref = "/product_remove?id=" + p.getId();
                 %>
                 <a href=<%=editHref%>>Edit</a>
+                <a href=<%=removeHref%>>Remove</a>
                 <%}%>
             </td>
             <%
@@ -59,6 +62,13 @@
         </tr>
         <%}%>
     </table>
+    <%
+        int pages = (int) request.getAttribute("pages");
+        for (int i = 1; i <= pages; i++) {
+            String pageHref = "/products?page=" + i;
+    %>
+    <a href=<%=pageHref%>><%=i%> </a>
+    <% }%>
     <br>
 </div>
 <%@include file="footer.jsp" %>

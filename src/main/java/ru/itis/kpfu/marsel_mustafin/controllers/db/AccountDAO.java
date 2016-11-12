@@ -39,7 +39,7 @@ public class AccountDAO implements DAO<Account> {
 
     public List<Account> getAll() {
         String query = "SELECT login, password, email FROM accounts;";
-        ResultSet rs = controller.executeStatement(query);
+        ResultSet rs = controller.executeQuery(query);
         return getListFromResultSet(rs);
     }
 

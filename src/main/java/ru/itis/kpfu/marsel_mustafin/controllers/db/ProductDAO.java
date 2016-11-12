@@ -3,6 +3,7 @@ package ru.itis.kpfu.marsel_mustafin.controllers.db;
 import ru.itis.kpfu.marsel_mustafin.controllers.db.interfaces.DAO;
 import ru.itis.kpfu.marsel_mustafin.models.Product;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,9 +49,23 @@ public class ProductDAO implements DAO<Product> {
         return false;
     }
 
+    public boolean remove(int id) {
+        if (con != null) {
+            try {
+                String query = "DELETE FROM albums WHERE id = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, id);
+                return ps.execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public List<Product> getAll() {
         String query = "SELECT id, band_name, album_name, description, quantity, price FROM albums";
-        ResultSet rs = controller.executeStatement(query);
+        ResultSet rs = controller.executeQuery(query);
         return getListFromResultSet(rs);
     }
 
@@ -107,7 +122,19 @@ public class ProductDAO implements DAO<Product> {
         return result.isEmpty() ? null : result;
     }
 
+    public int getLastId() {
+        String query = "SELECT max(id) FROM albums";
+        ResultSet rs = controller.executeQuery(query);
+        try {
+            rs.next();
+            return rs.getInt("max");
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     public void close() {
         controller.closeCon();
     }
+
 }

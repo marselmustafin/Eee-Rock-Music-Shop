@@ -3,12 +3,17 @@
 <%@include file="header.jsp" %>
 <div align="center">
     <%
-        Product p = new ProductDAO().getFirst("id", request.getParameter("id"));
+        String id = request.getParameter("id");
+        Product p = new ProductDAO().getFirst("id", id);
+        String action = "/product_operation?id=" + id;
     %>
-    <form action="/product_edit" method="post">
-        <%String source = "\"img/albumcovers/" + p.getId() + ".jpg\"";%>
-        <p><img width="256" height="256" src=<%=source%>></p>
+    <form action=<%=action%> method="post" enctype="multipart/form-data">
         <table>
+            <tr>
+                <td>
+                    <input type="file" name="file" size="50"/>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <label>Band name</label>
@@ -41,9 +46,11 @@
                     <textarea name="description"><%=p.getDescription()%></textarea>
                 </td>
             </tr>
+            <input type="hidden" name="operation" value="edit">
         </table>
         <input type="submit" value="Edit"><br>
         <%
+            request.setAttribute("operation", "edit");
             String msg = request.getParameter("msg");
             String success = request.getParameter("succ");
         %>
