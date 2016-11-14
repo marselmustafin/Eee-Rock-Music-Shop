@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ProductDAO implements DAO<Product> {
@@ -55,7 +56,8 @@ public class ProductDAO implements DAO<Product> {
                 String query = "DELETE FROM albums WHERE id = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, id);
-                return ps.execute();
+                ps.execute();
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -101,7 +103,7 @@ public class ProductDAO implements DAO<Product> {
     }
 
     private List<Product> getListFromResultSet(ResultSet rs) {
-        List<Product> result = new ArrayList<Product>();
+        List<Product> result = new LinkedList<Product>();
         if (rs != null) {
             try {
                 while (rs.next()) {
@@ -113,7 +115,7 @@ public class ProductDAO implements DAO<Product> {
                     int id = rs.getInt("id");
                     Product temp = new Product(bandName, albumName, description, quantity, price);
                     temp.setId(id);
-                    result.add(temp);
+                    result.add(0, temp);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

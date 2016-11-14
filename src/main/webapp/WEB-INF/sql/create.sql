@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS accounts;
-DROP TABLE IF EXISTS albums;
+DROP TABLE IF EXISTS accounts CASCADE ;
+DROP TABLE IF EXISTS comments CASCADE ;
+DROP TABLE IF EXISTS albums CASCADE ;
 
 CREATE TABLE accounts (
   id serial PRIMARY KEY NOT NULL,
@@ -22,7 +23,7 @@ CREATE TABLE comments (
   id serial PRIMARY KEY NOT NULL,
   author VARCHAR (50) NOT NULL,
   text VARCHAR (255) NOT NULL,
-  product_id serial REFERENCES albums(id)
+  product_id serial;
 );
 
 INSERT INTO accounts (login, password, email, role) VALUES ('nimda', 'myrules123', 'sergio@mail.ru', 2);

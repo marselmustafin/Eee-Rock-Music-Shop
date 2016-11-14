@@ -59,6 +59,12 @@ public class Cart {
         }
     }
 
+    public void clear(){
+        productCount = 0;
+        totalPrice = 0;
+        products.clear();
+    }
+
     public Map<Integer, Product> getProducts() {
         return products;
     }

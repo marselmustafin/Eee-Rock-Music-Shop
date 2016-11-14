@@ -29,7 +29,7 @@ public class Login extends HttpServlet {
         if (s.getAttribute("account") != null) {
             rs.sendRedirect("/products?page=1");
         } else {
-            rq.getRequestDispatcher("/login.jsp").forward(rq, rs);
+            rq.getRequestDispatcher("/views/login.jsp").forward(rq, rs);
         }
     }
 
@@ -47,9 +47,9 @@ public class Login extends HttpServlet {
             makeAttributes(s, login);
             rs.sendRedirect("/products?page=1");
         } else if (!AccountManager.isRegistrated("login", login)) {
-            rs.sendRedirect("login.jsp?msg=Login is not registered");
+            rs.sendRedirect("/views/login.jsp?error=Login is not registered");
         } else {
-            rs.sendRedirect("login.jsp?msg=Uncorrect password");
+            rs.sendRedirect("/views/login.jsp?error=Uncorrect password");
         }
     }
 

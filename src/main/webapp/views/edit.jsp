@@ -1,7 +1,15 @@
 <%@ page import="ru.itis.kpfu.marsel_mustafin.models.Product" %>
 <%@ page import="ru.itis.kpfu.marsel_mustafin.controllers.db.ProductDAO" %>
 <%@include file="header.jsp" %>
-<div align="center">
+<div class="content" align="center">
+    <%
+        if (role != 2) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }
+    %>
+    <div class="page-header">
+        <h1>Edit product</h1>
+    </div>
     <%
         String id = request.getParameter("id");
         Product p = new ProductDAO().getFirst("id", id);
@@ -19,7 +27,7 @@
                     <label>Band name</label>
                 </td>
                 <td>
-                    <input type="text" name="band" value=<%="\"" + p.getBandName() + "\""%>>
+                    <input type="text" name="band" value=<%="\"" + p.getBandName() + "\""%> required>
                 </td>
             </tr>
             <tr>

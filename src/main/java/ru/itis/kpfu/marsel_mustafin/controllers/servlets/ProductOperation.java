@@ -18,7 +18,8 @@ public class ProductOperation extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        filePath = getServletContext().getRealPath("/") + "img/albumcovers/";
+        filePath = getServletContext().getInitParameter("file_upload");
+        System.out.println(filePath);
     }
 
     @Override
@@ -67,16 +68,16 @@ public class ProductOperation extends HttpServlet {
             productId = Integer.parseInt(rq.getParameter("id"));
             product.setId(productId);
             if (dao.edit(product)) {
-                result = "/edit.jsp?id=" + productId + "&succ=Product successfully edited";
+                result = "/edit_product?id=" + productId + "&succ=Success";
             } else {
-                result = "/edit.jsp?id=" + productId + "&error=Error, couldn't change product";
+                result = "/edit_product?id=" + productId + "&error=Error";
             }
         } else {
             if (dao.addNew(product)) {
                 productId = dao.getLastId();
-                result = "/add.jsp?succ=Product successfully added";
+                result = "/add_product?succ=Success";
             } else {
-                result = "/add.jsp?error=Error, couldn't add product";
+                result = "/add_product?error=Error";
             }
         }
         if (item != null) {

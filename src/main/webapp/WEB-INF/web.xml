@@ -3,7 +3,14 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>Archetype Created Web Application</display-name>
+    <display-name>E-Rock Music Shop</display-name>
+
+    <context-param>
+        <param-name>file_upload</param-name>
+        <param-value>C:\Program Files\apache-tomcat-8.5.6\webapps\ROOT\img\albumcovers\</param-value>
+        <description>File Upload Location</description>
+    </context-param>
+
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Login</servlet-class>
@@ -22,7 +29,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductDetail</servlet-name>
-        <jsp-file>/product.jsp</jsp-file>
+        <jsp-file>/views/product.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>ProductRemove</servlet-name>
@@ -44,6 +51,26 @@
         <servlet-name>CommentOperation</servlet-name>
         <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.CommentOperation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Buy</servlet-name>
+        <servlet-class>ru.itis.kpfu.marsel_mustafin.controllers.servlets.Buy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <jsp-file>/views/cart.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>Edit</servlet-name>
+        <jsp-file>/views/edit.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>Add</servlet-name>
+        <jsp-file>/views/add.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>About</servlet-name>
+        <jsp-file>/views/index.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -54,7 +81,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
-        <url-pattern>/reg</url-pattern>
+        <url-pattern>/registration</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
@@ -83,5 +110,25 @@
     <servlet-mapping>
         <servlet-name>CommentOperation</servlet-name>
         <url-pattern>/comment_operation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Buy</servlet-name>
+        <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Edit</servlet-name>
+        <url-pattern>/edit_product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Add</servlet-name>
+        <url-pattern>/add_product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>About</servlet-name>
+        <url-pattern>/about</url-pattern>
     </servlet-mapping>
 </web-app>

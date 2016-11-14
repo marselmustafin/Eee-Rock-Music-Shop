@@ -1,6 +1,13 @@
 <%@include file="header.jsp" %>
-<div align="center">
-    <label>Edit</label>
+<div class="content" align="center">
+    <%
+        if (role != 2) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }
+    %>
+    <div class="page-header">
+        <h1>Add new product</h1>
+    </div>
     <form action="/product_operation" method="post" enctype="multipart/form-data">
         <table>
             <tr>
@@ -44,7 +51,7 @@
         </table>
         <input type="submit" value="Add"><br>
         <%
-            request.setAttribute("operation","add");
+            request.setAttribute("operation", "add");
             String msg = request.getParameter("msg");
             String success = request.getParameter("succ");
         %>

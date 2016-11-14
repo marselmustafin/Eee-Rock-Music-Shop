@@ -1,18 +1,68 @@
-.error {
+@font-face {
+    font-family: Slaytanic;
+    src: url(../fonts/Slaytanic.ttf);
+}
+
+.content {
+    margin-top: 5%;
+}
+
+.logo {
+    font-family: Slaytanic;
+    color: #ac2925;
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 25px;
+    line-height: 20px;
+}
+
+a.redd {
+    color: #761c19;
+    text-decoration: none;
+}
+
+a.redd:visited {
+    color: #843534;
+}
+
+a.redd:hover {
     color: red;
-    font-size: 150%;
+    text-decoration: none;
 }
 
-.error input {
-    border: 1px solid red;
+.rocktext {
+    font-family: Slaytanic;
+    color: #ac2925;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 20px;
+    line-height: 20px;
 }
 
-h5 {
-    color: grey;
-    font-size: 80%;
+body {
+    background: url("../img/backgroundimg.jpg");
 }
 
-p.success {
-    color: green;
-    font-size: 150%;
+.page-header {
+    font-family: Slaytanic;
+    color: #761c19;
+    font-size: 60px;
+}
+
+.product-block {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+input.enter{
+    width: 150px;
 }

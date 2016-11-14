@@ -7,7 +7,7 @@
     Product p = dao.getFirst("id", request.getParameter("id"));
     dao.close();
 %>
-<div align="center">
+<div class="content" align="center">
     <table>
         <tr>
             <td>
