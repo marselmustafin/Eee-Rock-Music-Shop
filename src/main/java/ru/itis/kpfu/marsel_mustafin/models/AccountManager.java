@@ -27,4 +27,8 @@ public class AccountManager {
     public static boolean isAdmin(String login) {
         return isRegistrated("login", login) && account.isAdmin();
     }
+
+    public static void setAccount(Account account) {
+        AccountManager.account = account;
+    }
 }

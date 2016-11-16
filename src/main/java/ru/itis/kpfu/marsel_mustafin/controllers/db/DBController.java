@@ -9,7 +9,7 @@ public class DBController {
     private final String PASS = "1234";
     private final String URL = "jdbc:postgresql://localhost:5432/shop";
 
-    DBController(){
+    public DBController(){
         try {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(URL, USER, PASS);

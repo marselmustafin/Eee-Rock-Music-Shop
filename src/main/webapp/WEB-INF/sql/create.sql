@@ -23,7 +23,7 @@ CREATE TABLE comments (
   id serial PRIMARY KEY NOT NULL,
   author VARCHAR (50) NOT NULL,
   text VARCHAR (255) NOT NULL,
-  product_id serial;
+  product_id serial
 );
 
 INSERT INTO accounts (login, password, email, role) VALUES ('nimda', 'myrules123', 'sergio@mail.ru', 2);
