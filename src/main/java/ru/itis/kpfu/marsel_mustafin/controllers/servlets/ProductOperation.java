@@ -57,15 +57,24 @@ public class ProductOperation extends HttpServlet {
         String operation = textParams.get("operation");
         String band = textParams.get("band");
         String album = textParams.get("album");
-        int quantity = Integer.parseInt(textParams.get("quantity"));
-        int price = Integer.parseInt(textParams.get("price"));
+        int productId = rq.getParameter("id") != null ? Integer.parseInt(rq.getParameter("id")) : 0;
+        int quantity, price;
+        try {
+            quantity = Integer.parseInt(textParams.get("quantity"));
+            price = Integer.parseInt(textParams.get("price"));
+        } catch (NumberFormatException e) {
+            String err = "Incorrect number";
+            if (operation.equals("edit")) {
+                return rq.getRequestURI().concat("?id=" + productId + "&error=" + err);
+            } else {
+                return "/add_product?error=" + err;
+            }
+        }
         String description = textParams.get("description");
         Product product = new Product(band, album, description, quantity, price);
         ProductDAO dao = new ProductDAO();
         String result;
-        int productId = 0;
         if (operation.equals("edit")) {
-            productId = Integer.parseInt(rq.getParameter("id"));
             product.setId(productId);
             if (dao.edit(product)) {
                 result = "/edit_product?id=" + productId + "&succ=Success";
